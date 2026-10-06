@@ -1,5 +1,6 @@
 [workspace]
 members  = ["crates/herdr-client", "crates/herdr-gpui", "crates/herdr-protocol"]
+exclude  = ["vendor/gpui-pre-apple"]
 resolver = "2"
 
 [workspace.package]
@@ -89,3 +90,9 @@ ureq                 = "3"
 uuid                 = { features = ["serde"], version = "1" }
 windows-sys          = { features = ["Win32_Foundation", "Win32_System_Pipes"], version = "0.61.2" }
 zeroize              = "=1.9.0"
+
+
+# Experiment: keep GPUI 0.3.6 but replace only its Apple renderer so we can
+# compare nearest-neighbor glyph atlas sampling against the stock linear sampler.
+[patch.crates-io]
+gpui-pre-apple = { path = "vendor/gpui-pre-apple" }
