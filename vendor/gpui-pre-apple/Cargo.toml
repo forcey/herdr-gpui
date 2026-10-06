@@ -1,0 +1,40 @@
+[package]
+name = "gpui-pre-apple"
+version = "0.3.6"
+edition = "2024"
+license = "Apache-2.0"
+publish = false
+build = "build.rs"
+
+[lib]
+path = "src/gpui_apple.rs"
+name = "gpui_apple"
+doctest = false
+
+[features]
+default = []
+bench-support = ["gpui/bench-support"]
+test-support = ["gpui/test-support"]
+runtime_shaders = []
+
+[dependencies]
+gpui = { package = "gpui-pre", version = "=0.3.6" }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+anyhow = "1.0.86"
+block = "0.1"
+cocoa = "=0.26.0"
+core-foundation = "0.10"
+core-video = { version = "0.5.2", features = ["metal"] }
+derive_more = { version = "2.1.1", features = ["deref", "deref_mut"] }
+etagere = "0.2"
+foreign-types = "0.5"
+image = { version = "0.25.1", default-features = false }
+log = { version = "0.4.16", features = ["kv_unstable_serde", "serde"] }
+metal = "0.33"
+objc = "0.2"
+objc2 = "0.6"
+parking_lot = "0.12.1"
+
+[target.'cfg(target_os = "macos")'.build-dependencies]
+cbindgen = { version = "0.28.0", default-features = false }
